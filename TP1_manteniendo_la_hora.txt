@@ -1,3 +1,8 @@
+******************************************
+Administración de sistemas - TUASSL - 2014
+Facultad de Informática - UNCOMA
+******************************************
+
 Ejercicio 1 
 ¿Qué entiende por zona horaria o timezone? 
 
@@ -15,9 +20,12 @@ Obtenga la hora actual con el comando date
 
 
 Ejercicio 2
-El usuario Umar vive en Singapur. Crear un usuario para Umar 
+a) El usuario Umar vive en Singapur. Crear un usuario para Umar 
 con el timezone adecuado para él. Verifique que al cerrar e 
 iniciar nuevamente la sesión, el timezone se mantiene (ayuda: tzselect). 
+
+b) Repita lo anterior para un usuario llamado Boris Romanoff que vive 
+en Rusia. Verifique el usuario. 
 
 
 Ejercicio 3
