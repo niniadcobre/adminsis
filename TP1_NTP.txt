@@ -1,0 +1,42 @@
+******************************************
+Administración de sistemas - TUASSL - 2014
+Facultad de Informática - UNCOMA
+Trabajo práctico N1 - Network Time Protocol (NTP) 
+******************************************
+
+Ejercicio 1
+Utilice los servidores para Argentina listados en:
+http://www.pool.ntp.org/zone/ar
+Configure e inicie el servicio de NTP. Verifique su correcto funcionamiento 
+(recuerde que esto puede tomar algunos minutos).
+Ayuda: utilice el comando service para iniciar el servicio NTP.  
+
+Ejercicio 2
+	a) Obtenga la IP del servidor que fue elegido para sincronizar la hora
+	en el ejercicio anterior.
+	b) Detenga el servicio de NTP (recuerde el comando service). 
+	c) Retrase la hora del sistema 5 minutos. 
+	d) Utilice la opción -d (debug) de ntpdate para comunicarse con el 
+	servidor obtenido en a). ¿Se ha actualizado el reloj del sistema? 
+	e) Sincronice la hora del sistema con el comando ntpdate usando la IP del servidor que obtuvo en a). Verifique el resultado. 
+	f) Vuelva a iniciar el servicio de NTP. 
+	g) ¿Para qué sirve ntpdate? ¿Puede causar algún inconveniente utilizarlo
+	   sin verificar previamente la hora del sistema?
+
+Ejercicio 3) 
+Determine cuál es el proceso (demonio/servicio) en ejecución que implementa NTP 
+en su máquina. Compruebe deteniendo y reiniciando el servicio de NTP. 
+
+Ejercicio 4
+	a) Cambie la actual configuración del servicio de NTP, tal que utilice 
+	exclusivamente el servidor NTP provisto por la computadora en 
+	10.0.15.101. Verifique el resultado observando contra qué servidores 
+	se encuentra sincronizando la hora actualmente. 
+	b) Basado en el ejercicio anterior responda: 
+		- ¿Es necesario tener una conexión a Internet para tener las 
+		máquinas de una misma red LAN sincronizadas? 
+		- ¿Es inmediata la sincronización de la hora del sistema con 
+		los servidores NTP? 
+		- ¿Que ventaja se obtiene al utilizar servidores NTP dentro 
+		de una red LAN? Piense en el tipo de conexiones requeridas y 
+		el camino del tráfico de red. 
