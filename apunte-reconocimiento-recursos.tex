@@ -53,7 +53,7 @@
 Un administrador de sistemas es quien gestiona los recursos de un sistema informático. 
 Recordemos que la Administración de Sistemas es el conjunto de tareas necesarias para mantener
 un computador en buenas condiciones de uso [Intro].
-Por lo tanto, una de las tareas elementales es conocer como
+Por lo tanto, una de las tareas elementales es conocer cómo
 identificar y verificar el funcionamiento correcto de los recursos a gestionar.
 
 En esta guía se describen procedimientos y programas que generalmente se utilizan
@@ -67,7 +67,7 @@ investigar cuál es la forma de obtener información del recurso, y cómo observ
 Los recursos detallados en este documento pueden referirse a :
 
 \begin{itemize}
-	\item recursos físicos, como por ejemplo una CPU (de los cuales nos interesa su reprensentación por software en el sistema operativo);
+	\item Recursos físicos, como por ejemplo una CPU (de los cuales nos interesa su representación por software en el sistema operativo);
 	\item o recursos netamente lógicos que no tienen una
 contraparte física, como puede ser un proceso (programa en ejecución), una prioridad de ejecución, 
 un sistema de archivos, etc. 
@@ -77,11 +77,13 @@ un sistema de archivos, etc.
 
 \section*{Identificando recursos}
 
-Comenzaremos por identificar recursos físicos con un ejemplo, que nos permita
+Comenzaremos por identificar recursos físicos con un ejemplo que nos permita
 listar sus características y la forma en que 
-se encuentra representado en el sistema operativo.
-Un procedimiento sencillo de recordar, al momento de gestionar recursos, es pensar en la siguiente pregunta: \\
-¿Qué programas nos permite obtener información acerca del dispositivo?. \\
+se encuentran representados en el sistema operativo.
+Un procedimiento sencillo de recordar, al momento de gestionar recursos, es hacernos la siguiente pregunta: 
+¿Qué programas nos permite obtener información acerca del dispositivo?. 
+
+
 Por ejemplo, si se necesita reconocer un dispositivo USB recientemente conectado, 
 el administrador debe identificar el conjunto de comandos que le permita obtener información del recurso.
 En este caso, la identificación de los programas útiles se resuelve casi 
@@ -132,8 +134,9 @@ hardware dentro del sistema operativo.
 \subsection*{Aprendiendo a escuchar al kernel Linux}
 
 Como sabemos, el kernel Linux es el primer elemento de software del sistema operativo 
-que se carga luego del gestor de arranque, y es quien inicializa y toma control del hardware. 
-El resto del sistema operativo que se carga a continuación de este, interactúa con el kernel 
+que se carga en memoria principal (RAM) para su ejecución (luego del gestor de arranque). 
+Y es quien inicializa y toma control del hardware. 
+El resto del sistema operativo que se carga a continuación del kernel, interactúa con él 
 cuando necesita utilizar el hardware con algún fin. 
 
 A medida que el kernel Linux reconoce el hardware, tanto en el arranque como durante la 
@@ -141,12 +144,17 @@ operación normal del sistema al insertar y remover dispositivos de hardware
 en caliente (sin apagar la computadora), el kernel se comunica a través de mensajes para 
 que el administrador tenga información acerca de lo que sucede. 
 
-Estos mensajes son recolectados y guardados en archivos bitácora (logs) para su posterior 
-revisión por parte de los administradores de sistemas. 
+Estos mensajes son recolectados y guardados en archivos de bitácora (logs), para su posterior 
+revisión por parte de los administradores de sistemas. Quien se encarga de organizar estos 
+mensajes, junto a los producidos por otros elementos del sistema, como ser los demonios, o 
+incluso los procesos de usuario, es el demonio {\bf syslog}. En general, en las distribuciones
+GNU/Linux, los archivos de bitácora residen en el directorio /var/log. 
+
 La información provistas por el kernel no se limita a reconocimiento del hardware, también 
-provee información sobre el funcionamiento del mismo, y otros componentes lógicos que 
-interactúan con el kernel. 
-Es tarea del administrador leer la información que el kernel provee. 
+provee información sobre el funcionamiento de él mismo, y otros componentes lógicos que 
+interactúan con él. 
+\textbf{Es tarea del administrador leer la información que el kernel provee a través 
+de las bitácoras.}
 
 En las secciones siguientes se proveen herramientas específicas para consultar el estado 
 e información de dispositivos de hardware, sin embargo el administrador de sistemas debe
@@ -160,14 +168,18 @@ específicas, revisar los archivos de bitácora del sistema y el buffer temporal
 \parbox[t]{1.0\linewidth}{ \vspace*{0.4cm}
 En las distribuciones GNU/Linux el directorio {\bf \texttt{/var/log}} contiene diferentes 
 archivos de bitácora donde distintos elementos del sistema reportan su actividad. En 
-particular, es de interés el archivo {\bf \texttt{/var/log/messages}}, ya que es en dónde 
-el kernel vuelca su información. 
+particular, serán de nuestro interés los archivos {\bf \texttt{/var/log/messages} y 
+\texttt{/var/log/kern.log} }, 
 \vspace*{0.4cm} } }
 
 
-Cada línea en el archivo \texttt{/var/log/messages} consta de una estampilla de tiempo, 
-el nombre del sistema, el componente del sistema operativo que reporta el mensaje y 
-finalmente el mensaje. 
+Cada línea en el archivo \texttt{/var/log/messages} consta de:
+\begin{itemize} 
+\item Una estampilla de tiempo, 
+\item el nombre del sistema, 
+\item el componente del sistema operativo que reporta el mensaje y, finalmente 
+\item el mensaje. 
+\end{itemize}
 
 \colorbox{grey}{\parbox[t]{0.95\linewidth}{ \vspace*{0.5cm} { 
 {\bf Ejemplo: mensajes del kernel Linux al conectar (en caliente) un módem 3g\\ }
@@ -195,14 +207,14 @@ Los mensajes del kernel dependen de la configuración del sistema.
 
 \fcolorbox{black}{grey}{
 \parbox[t]{1.0\linewidth}{ \vspace*{0.4cm}
-{\bf Lo importante :} Incorporar el hábito de consultar los archivos de log e
-identificar la información de interés para el recurso a identificar, o bien la ausencia de la misma.
+{\bf Lo importante :} Incorporar el {\bf hábito} de consultar los archivos de bitácora e
+identificar la información de interés para el recurso en cuestión, o bien la ausencia de la misma.
 \vspace*{0.4cm} } }
 
-Además de los mensajes almacenados en el archivo \texttt{/var/log/message}, el kernel Linux posee un buffer 
+Además de los mensajes almacenados en el archivo \texttt{/var/log/messages}, el kernel Linux posee un buffer 
 (sección de memoria) en el que almacena temporalmente los mensajes que va emitiendo. Este buffer es 
-finito y la información en él se va perdiendo a medida que nuevos mensajes son temporalmente guardados. Sirve para 
-consultar los últimos mensajes emitidos, y no posee marcas de tiempo. Para ver la información contenida en el 
+finito y la información en él se va sobrescribiendo. Sirve para 
+consultar los últimos mensajes emitidos sin recurrir a los archivos de bitácora. Para ver la información contenida en el 
 buffer utilizamos el comando \texttt{\textbf{dmesg}}. 
 
 Por ejemplo cuando estamos tratando de reconocer la actividad del sistema al agregar y quitar 
@@ -215,13 +227,17 @@ dispositivos en caliente (hot plug en inglés), una secuencia clásica es :
 	\item Volver a ejecutar \texttt{dmesg} para reconocer los nuevos mensajes producidos por el kernel.
 \end{enumerate}
 
+En algunos casos, es posible que el {\it demonio syslog} no se encuentre en ejecución y por ende los archivos
+de bitácora no son actualizados. En estos casos, la información provista por el comando {\tt dmesg} será de 
+gran utilidad. 
+
 
 \subsection*{Información del CPU}
 
 Si se consulta \texttt{man -k cpu}, encontraremos muchos comandos probables, quizá 
 uno de los más evidentes es \textbf{\texttt{lscpu}} cuya función es listar el contenido del archivo 
 \texttt{/proc/cpuinfo} (normalmente los comandos ls{\textless}algo\textgreater  
-\textbf{listan} información acerca de {\textless}algo\textgreater).
+ \textbf{listan} información acerca de {\textless}algo\textgreater).
 
 \colorbox{grey}{\parbox[t]{0.95\linewidth}{ \vspace*{0.5cm} { 
 {\bf Ejemplo : Utilizando lscpu }
@@ -480,9 +496,12 @@ y 5 tienen un UUID asignado para su identificación unívoca: \\
 }
 } \vspace*{0.5cm} } } 
 
+\subsection*{lshw}
+
 Por último, un administrador de sistemas puede necesitar más información acerca 
 del dispositivo, por ejemplo, quién es su fabricante, cuál es el tipo de
-controlador físico (IDE, SCSI, SATA, etc) al que se encuentra conectado, etc. 
+controlador físico (por ejemplo IDE, SCSI, SATA, etc. en el caso de discos) 
+al que se encuentra conectado, etc. 
 El comando \texttt{lshw} provee esta información: 
 
 \colorbox{grey}{\parbox[t]{0.95\linewidth}{ \vspace*{0.5cm} { 
@@ -563,24 +582,30 @@ El comando \texttt{lshw} provee esta información:
 }
 } \vspace*{0.5cm} } } 
 
+El comando {\tt lshw} permite obtener información sobre gran cantidad de dispositivos.
+Es posible obtener información de una clase de dispositivos en particular. Por ejemplo
+si quisiéramos obtener {\bf información acerca de los dispositivos de red} disponibles,
+podríamos ejecutar: 
 
 \colorbox{grey}{\parbox[t]{0.95\linewidth}{ \vspace*{0.5cm} { 
 {\tt \scriptsize
-           *-cdrom\\
-                description: DVD-RAM writer\\
-                product: CDDVDW TS-L633N\\
-                vendor: hp\\
-                physical id: 1\\
-                bus info: scsi@1:0.0.0\\
-                logical name: /dev/cdrom\\
-                logical name: /dev/cdrw\\
-                logical name: /dev/dvd\\
-                logical name: /dev/dvdrw\\
-                logical name: /dev/sr0\\
-                version: 0300\\
-                capabilities: removable audio cd-r cd-rw dvd dvd-r dvd-ram\\
-                configuration: ansiversion=5 status=nodisc\\
-
+\# lshw -C network\\
+  *-network\\
+       description: Ethernet interface\\
+       product: RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller\\
+       vendor: Realtek Semiconductor Co., Ltd.\\
+       physical id: 0\\
+       bus info: pci@0000:01:00.0\\
+       logical name: eth0\\
+       version: 06\\
+       serial: 94:de:80:72:ec:74\\
+       size: 1Gbit/s\\
+       capacity: 1Gbit/s\\
+       width: 64 bits\\
+       clock: 33MHz\\
+       capabilities: bus\_master cap\_list ethernet physical tp mii 10bt 10bt-fd 100bt 100bt-fd 1000bt 1000bt-fd autonegotiation\\
+       configuration: autonegotiation=on broadcast=yes driver=r8169 driverversion=2.3LK-NAPI duplex=full firmware=rtl8168e-3\_0.0.4 03/27/12 latency=0 link=yes multicast=yes port=MII promiscuous=yes speed=1Gbit/s\\
+       resources: irq:42 ioport:e000(size=256) memory:d0004000-d0004fff memory:d0000000-d0003fff\\
 }
 } \vspace*{0.5cm} } } 
 
@@ -653,7 +678,9 @@ a la Administración de Sistemas. UNCOMA. TUASSL.
 
 \section*{Licencia}
 
-Este texto fue creado por Miriam Tamara Lechner y se encuentra bajo 
-Licencia Creative Commons Atribución-CompartirDerivadasIgual 3.0 Unported
+Copyright (C) 2014 Lechner Miriam.
+
+Se concede autorización para copiar, distribuir y/o modificar este documento
+bajo los términos de la Licencia Creative Commons Atribución-CompartirDerivadasIgual 3.0 Unported. 
 
 \end{document}
