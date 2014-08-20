@@ -41,7 +41,7 @@ TP N 2 - Reconocimiento de recursos del sistema
 
 7. ¿Cuál es la marca y modelo de la placa de sonido?
 
-8. Escriba su primer programa script que reporta informacion del sistema.
+8. Escriba su primer programa script que reporta información del sistema.
    Editar con Vi un nuevo archivo llamado "sysinfo.sh" , que será el programa a entregar y ejecutar.
    Dentro del archivo coloque el siguiente programa script:
 
@@ -60,7 +60,7 @@ fdisk -l | grep Disk
     - Agregue al archivo script "sysinfo.sh" permiso de ejecución.
     - Ejecute el script y redirija la salida a este archivo. 
     
-9. Ampliar el script anterior para que presente al usuario informacion 
+9. Ampliar el script anterior para que presente al usuario información 
     del CPU, de la placa de video VGA, y de la cantidad de procesos en ejecución.
     - Ejecute el script y redirija la salida. 
 
@@ -75,8 +75,21 @@ el kernel Linux.
 	- ¿Quién genera los archivos? 
 	- ¿Qué sucede con los mensajes viejos? ¿Se encuentran todos en el mismo 
 	archivo?
+	- Interprete los permisos de los archivos messages. 
 
 
+12. Sobre el archivo messages.2.gz en PEDCO. Este es un archivo de bitácora
+perteneciente a una computadora personal. Responda: 
+	- ¿Cuál es el nombre del sistema? 
+	- ¿Cuántos días se encuentran registrados en el archivo?
+	- ¿Cuántas líneas posee el archivo? 
+	- Extraiga únicamente las líneas producidas por el kernel Linux. 
+	- ¿Se han conectado dispositivos de almacenamiento masivo? -Indique las líneas 
+	que correspondan. 
+	- ¿Que otros componentes del sistema operativo han reportado eventos en 
+	esta bitácora?
 
+13. Utilice el comando logger para registrar mensajes en la bitácora. ¿Puede un 
+usuario que no sea root escribir en la bitácora? 
 	
 
