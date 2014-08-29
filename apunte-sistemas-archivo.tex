@@ -77,8 +77,8 @@ operativo.
 
 Además de los discos rígidos, otros dispositivos de almacenamiento 
 masivo suelen particionarse, como por ejemplo las memorias flash (pendrive).
-Este apunte pretende cubrir el concepto de particionado, aplicando en 
-particular dicho concepto a los esquemas seguidos por las PC convencionales.  
+Este apunte pretende cubrir el concepto de particionado, aplicando  
+dicho concepto a los esquemas seguidos por las PC convencionales.  
 
 
 \subsection*{El MBR, sectores de arranque y la tabla de particiones}
@@ -102,9 +102,11 @@ soportan particionado, sin embargo es bueno tener presente que si estamos
 frente a un sistema operativo  que no lo soporta, entonces  no podrá 
 coexistir en un mismo disco con los que si. 
 
-Es importante almacenar la información detallada de las tablas de 
+Debido a que la información de las particiones es indispensable para 
+arrancar el sistema, es importante almacenar la información detallada 
+de las tablas de 
 particiones en una computadora distinta, mediante algún mecanismo de 
-copia de respaldo, para poder recuperar la información almacenada en 
+copia de respaldo, para poder recuperarla en 
 caso de que la tabla de particiones sea modificada por error. En 
 particular el comando \texttt{fdisk} nos permite listar esta información: 
 
@@ -142,11 +144,19 @@ para archivos de usuarios, de modo que el directorio \texttt{/home} se
 encuentre en una partición separada. 
 
 Para superar esta limitación de diseño, se inventaron las particiones 
-extendidas. Este truco permite particionar una partición primaria en 
+extendidas. Este truco permite subdividir una partición primaria en 
 sub-particiones. Esta partición primaria subdividida es la partición 
 extendida; las sub-particiones son las particiones lógicas. Se comportan 
 como particiones primarias, pero se crean de diferente manera. No existen
 diferencias de rendimiento entre ellas.
+
+Entonces, las particiones extendidas son un tipo especial de partición 
+que a diferencia de las particiones primarias no contiene datos, sino que 
+sirve como contenedor de otras (lógicas). Las entradas en la tabla de 
+particiones primarias apuntan al (o sea, contienen la dirección del) bloque 
+de disco donde comienzan los datos de esa partición, pero las de extendidas 
+apuntan a un bloque que contiene una nueva tabla de particiones. 
+Este bloque mide 1KB, de ahí el tamaño de una extendida.
 
 La estructura de particiones de un disco duro debe parecerse a la que 
 aparece en la figura a continuación. El disco se divide en tres particiones 
@@ -289,17 +299,24 @@ Se están sincronizando los discos.\\
 
 \subsection*{Archivos de dispositivo y particiones}
 
-Cada partición y partición extendida posee su propio archivo de 
-dispositivo. El convenio de nombres para estos archivos es que se añade 
-un número de partición detrás del nombre del disco entero, con el 
+En primer lugar, cada dispositivo de almacenamiento masivo tendrá un archivo, 
+normalmente dentro del directorio /dev, que lo representa lógicamente y que 
+nos permitirá manipularlo. Por ejemplo, {\tt /dev/sda} podrá hacer referencia
+al primer disco que reconoce el sistema durante el proceso de arranque.  
+Por otra lado, cada partición posee su propio archivo de dispositivo. El 
+convenio de nombres para estos archivos 
+añade un número de partición detrás del nombre del disco entero, con el 
 convenio de que las particiones primarias van del 1 al 4 
 (independientemente de cuantas particiones primarias existan) y las 
 particiones lógicas tienen números mayores que 5 
 (independientemente de la partición primaria en la que residan). Por 
-ejemplo, \texttt{/dev/sda1} es la primera partición primaria del primer
+ejemplo, \texttt{/dev/sda1} será la primera partición primaria del primer
 disco duro, mientras que \texttt{/dev/sda5} será la primer partición 
 lógica del mismo disco.
 
+Las particiones primarias serán numeradas 1 a 4, una de ellas podrá ser 
+extendida, conteniendo particiones lógicas con numeración 5 en adelante. 
+ 
 \section*{Sistemas de archivos}
 
 Un disco y sus particiones por en si mismas no son más que una organización
