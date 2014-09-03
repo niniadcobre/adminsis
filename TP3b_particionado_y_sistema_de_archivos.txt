@@ -1,0 +1,54 @@
+******************************************************************
+        Administración de Sistemas
+        Departamento Ingeniería de Computadoras
+        Facultad de Informática - Universidad Nacional del Comahue
+******************************************************************
+
+TP N 3 b - Particiones y Sistemas de Archivos
+---------------------------------------------
+
+ NOTA : Los siguientes ejercicios se realizan en su totalidad desde una
+        terminal en un sistema GNU/Linux, en una de las máquinas virtuales
+	propuestas para laboratorio.
+	Para cada pregunte indique el comando o los comandos que utilizó
+        para obtener la respuesta.
+
+1- Observe los sistemas de archivos de disco presentes en el sistema:  
+	- ¿Para qué sirven los comandos df y mount?
+   	- ¿Qué sistemas de archivos se encuentran actualmente montados en el 
+	sistema?
+	- ¿Cuáles son los puntos de montaje de cada sistemas de archivos?
+	- Sitúese en algún directorio dentro de /home e intente desmontar 
+	(comando umount) el sistema de archivos. ¿Qué sucede? ¿Por qué cree 
+	que sucede esto? 
+	- Sitúese fuera del directorio /home y verifique que el sistema de 
+	archivos no esta en uso (comando fuser). Desmóntelo. 
+	- Monte la partición que corresponde al directorio /home en un punto de
+	 montaje distinto, verifique que puede acceder a los datos utilizando 
+	el nuevo punto de montaje. Desmóntelo. 
+	- Utilice el comando: mount -a, verifique que el directorio /home ha 
+	sido restablecido a su punto de montaje original. ¿Por qué? Rta: 
+	ejercicio a continuación. 
+	
+
+2 - El archivo /etc/fstab permite definir información acerca de los sistemas 
+    de archivos del sistema: 
+	- Observe el contenido de /etc/fstab
+	- ¿Coinciden las entradas en dicho archivo con los sistemas montados 
+	actualmente? 
+	- ¿Qué sucedería si elimina la línea correspondiente a /home? Inténtelo
+	observando antes y después de un reinicio el contenido del directorio 
+	/home. 
+	- ¿Qué indica cada campo del archivo /etc/fstab? 
+	- Utilizando la información anterior restaure la línea correspondiente 
+	al directorio /home y verifique su correcto funcionamiento. ¿Es 
+	necesario reiniciar el equipo? 
+
+
+1 - Responda las siguientes preguntas:
+	- ¿Es una actividad riesgosa alterar la tabla de particiones de un 
+	disco? 
+	- ¿Dónde se encuentra almacenada la tabla de particiones? 
+	- ¿Si alteramos la tabla de particiones, se altera el contenido de las
+	mismas? 
+
