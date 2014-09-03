@@ -14,7 +14,8 @@ TP N 3 b - Particiones y Sistemas de Archivos
         para obtener la respuesta.
 
 1- Observe los sistemas de archivos de disco presentes en el sistema:  
-	- ¿Para qué sirven los comandos df y mount?
+	- ¿Para qué sirven los comandos df y mount? ¿Cómo es la sintaxis del 
+	comando mount?
    	- ¿Qué sistemas de archivos se encuentran actualmente montados en el 
 	sistema?
 	- ¿Cuáles son los puntos de montaje de cada sistemas de archivos?
@@ -26,11 +27,11 @@ TP N 3 b - Particiones y Sistemas de Archivos
 	- Monte la partición que corresponde al directorio /home en un punto de
 	 montaje distinto, verifique que puede acceder a los datos utilizando 
 	el nuevo punto de montaje. Desmóntelo. 
-	- Utilice el comando: mount -a, verifique que el directorio /home ha 
-	sido restablecido a su punto de montaje original. ¿Por qué? Rta: 
-	ejercicio a continuación. 
+	- Utilice el comando: mount /home, verifique que el directorio /home ha
+	sido restablecido a su punto de montaje original. ¿Por qué? ¿Cómo sabe 
+	el sistema qué partición contiene el sistema de archivos correcto? 
+	Rta: ejercicio a continuación. 
 	
-
 2 - El archivo /etc/fstab permite definir información acerca de los sistemas 
     de archivos del sistema: 
 	- Observe el contenido de /etc/fstab
@@ -44,11 +45,67 @@ TP N 3 b - Particiones y Sistemas de Archivos
 	al directorio /home y verifique su correcto funcionamiento. ¿Es 
 	necesario reiniciar el equipo? 
 
+3 - El punto de montaje será un directorio dentro de la jerarquía de 
+    directorios, en el cual se "engancha" el contenido del sistema de 
+    archivos de un dispositivo. Así pues el directorio /home que pertenece al
+    sistema de archivos del dispositivo que contiene al /, será el punto de 
+    enganche del sistema de archivos contenido en el dispositivo /dev/sdb1. 
+    Observemos qué sucede con el contenido de /home previo y posterior al 
+    montaje del sistema de archivos. 
+	- Verificar que /home y subdirectorios no están en uso y desmontarlo.
+	- Observar el contenido del directorio /home, ¿existe algún archivo 
+	creado dentro de dicho directorio? 
+	- Cree un archivo dentro del directorio /home ¿en qué sistema de 
+	archivos se encuentra ocupando espacio el nuevo archivo?
+	- Monte nuevamente /dev/sdb1 sobre /home. 
+	- ¿Es accesible en este momento el nuevo archivo creado? ¿Qué sucedió 
+	con el archivo? 
+	- Desmonte nuevamente /dev/sdb1 y verifique que el nuevo archivo aún
+	existe, elimínelo. 
+	- Vuelva a montar el sistema de archivos en /dev/sdb1 en /home. 
+	- ¿Qué conclusión saca de todo lo anterior? 
 
-1 - Responda las siguientes preguntas:
+4 - Tabla de particiones: copia de respaldo. 
+	- Guarde la tabla de particiones correspondiente al dispositivo 
+	que contiene la partición correspondiente a /home. 
+	- Desmonte el sistema de archivos en /home 
+	- Modifique la tabla de particiones (comando fdisk) correspondiente 
+	al sistema de archivos de /home, tal que su nuevo tamaño sea la mitad 
+	del original. Guarde los cambios.
+	- Intente montar el sistema de archivos de /home nuevamente. ¿Qué 
+	sucede? ¿Por qué cree que sucede?
+	- Utilizando la información del primer inciso, recupere la tabla de 
+	particiones a su estado original. 
+	- Intente montar el sistema de archivos de /home nuevamente. Imagine 
+	lo que sucedería si usted reinicia el sistema habiendo alterado 
+	erróneamente la tabla de particiones. 
+
+5 - Escriba un procedimiento paso a paso que permita redimensionar un sistema 
+    de archivos _con contenido_ a la mitad de su tamaño, sin perder datos 
+    (asumiendo que los datos caben en la mitad del espacio). 
+    Verifique su procedimiento sobre el sistema de archivos de /home. 
+
+6 - Utilizando el espacio libre que liberó en el ejercicio anterior en el 
+    dispositivo que contiene la partición correspondiente a /home, cree una
+    nueva partición extendida, que contenga una partición lógica con todo  
+    el espacio libre disponible:
+	- ¿Cuál es el nuevo archivo de dispositivo que representa la partición 
+	lógica?
+	- Cree un sistema de archivos de tipo vfat sobre la nueva partición.
+	- Incorpore una entrada en /etc/fstab para que el nuevo sistema de 
+	archivos se monte durante el arranque del sistema en /home/carlitos
+	- Verifique sin reiniciar la validez de la entrada en fstab (mount)
+	- Reinicie el sistema y verifique todos los sistemas de archivos
+	montados al volver. 
+	- ¿Cuánto espacio disponible hay en cada sistema de archivos?
+	- Revierta los cambios y vuelva a asignar todo el espacio del 
+	dispositivo al sistema de archivos de /home. 
+
+7 - Responda las siguientes preguntas:
 	- ¿Es una actividad riesgosa alterar la tabla de particiones de un 
 	disco? 
 	- ¿Dónde se encuentra almacenada la tabla de particiones? 
-	- ¿Si alteramos la tabla de particiones, se altera el contenido de las
-	mismas? 
-
+	- ¿Si alteramos la tabla de particiones, se altera el contenido del 
+	espacio de datos? 
+	- ¿Qué usuario/s tiene/n privilegios suficientes para alterar la tabla
+	de particiones?
