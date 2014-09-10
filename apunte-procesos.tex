@@ -53,13 +53,13 @@
 Hemos hablado durante un apunte anterior acerca de reconocimiento de 
 recursos físicos, identificar sus características y representación dentro 
 del sistema operativo. Durante el próximo texto hablaremos de 
-monitorear el consumo de recursos por parte de los proesos en ejecución. 
+monitorear el consumo de recursos por parte de los procesos en ejecución. 
 Por este motivo, durante el presente apunte se desarrollarán conceptos y 
 procedimientos relacionados a la administración de procesos, como una 
 instancia previa a evaluar el consumo de recursos por parte de los mismos.
 
 Es decir, no podemos evaluar el consumo de recursos por parte de los
-procesos, sin conocer mínimamente las actividades báscias de administración
+procesos, sin conocer mínimamente las actividades básicas de administración
 que se realizan sobre los mismos. 
 
 
@@ -73,11 +73,18 @@ por los usuarios, sino que los ejecuta el sistema operativo en sí mismo
 para cumplir sus funciones. Por ejemplo, el proceso \texttt{init}, ó el 
 servicio de ssh. 
 
+Programas y procesos son entidades distintas. En un sistema operativo 
+multitarea, múltiples instancias de un programa pueden ejecutarse 
+simultáneamente. Cada instancia es un proceso separado. Por ejemplo, si cinco 
+usuarios desde equipos diferentes, ejecutan el mismo programa al mismo tiempo, 
+habría cinco instancias del mismo programa, es decir, cinco procesos distintos.
+
+
 Los procesos en ejecución necesitan consumir recursos computacionales para 
 llevar a cabo su función: CPU, memoria principal (RAM), memoria secundaria, 
 transferir datos por red, etc. Algunos procesos necesitarán más tiempo de 
 CPU, como puede ser un juego, o un programa de calculo; mientras que 
-otros, por ejemplo el web browser, necesitarán más memoria principal 
+otros, por ejemplo el navegador web, necesitarán más memoria principal 
 (RAM), etc.
 
 Es la intención de este apunte observar el consumo de recursos por parte de 
@@ -140,7 +147,67 @@ estará en estado S, cunado necesita ejecutarse estará en estado R, etc.
 Es decir, el administrador de sistemas, en general no interviene en las
 transiciones de estados. Sin embargo, hay casos en los que esto ocurre. 
 
-\subsection*{Manipulación de procesos}
+\subsection*{Identificación de procesos}
+
+Los procesos se encuentran organizados de manera jerárquica. Dicha jerarquía se 
+origina a partir del primer proceso del sistema {\tt init} (o systemd en 
+distribuciones más modernas), que como vimos en apuntes previos es iniciado por 
+el núcleo o kernel del sistema. Este proceso a su vez iniciará la ejecución de
+nuevos procesos, que llamaremos ``procesos hijos'', siendo {\tt init} su padre.
+Una vez que el sistema se encuentra funcional (alcanzó un nivel de ejecución de 
+multiusuario o equivalente en systemd), los usuarios interactúan con el sistema
+dando así origen a nuevos procesos. 
+
+Prácticamente todo lo que se está ejecutando en el sistema en cualquier momento 
+es un proceso, incluyendo el shell, el ambiente gráfico que puede tener 
+múltiples procesos, etc. La excepción a lo anterior es el kernel en si, el cual 
+es un conjunto de rutinas que residen en memoria y a las cuales acceden los 
+procesos a través de llamadas al sistema.
+
+Por ejemplo cuando un usuario inicia sesión y abre un navegador web, éste será 
+un nuevo proceso en ejecución, hijo de algún proceso del entorno gráfico que 
+en algún punto del árbol genealógico terminará siendo hijo de init. Es decir,
+\textbf{todos los procesos son descendientes en algún grado de init}. 
+
+Cada proceso que se inicia es referenciado con un número de identificación 
+único conocido como Process ID PID, que es siempre un entero positivo. En la 
+administración de procesos es importante la identificación numérica, pues es
+a través de estos PID que lograremos identificar, detener, reactivar o terminar
+procesos.  
+
+Existen múltiples comandos que nos permiten la identificación del PID asociado 
+a un determinado programa en ejecución: {\tt ps, pstree} y {\tt top} son 
+algunos de los más frecuentes. 
+
+Con el fin de evidenciar la jerarquía veamos a continuación un extracto de la 
+salida del comando \texttt{pstree -ap} (man pstree). 
+
+\begin{center}
+\includegraphics{jerprocs.png}
+\end{center}
+
+En la imágen anterior, el proceso {\tt gdm3} con PID 1543 es hijo directo del 
+proceso {\tt systemd} (podría haber sido {\tt init}). Mientras que el navegador
+web {\tt iceweasel} con PID 1997 es hijo directo de un proceso del entorno 
+gráfico con PID 1972, que a su vez es hijo de un shell {\tt sh} con PID 1913, 
+que a su vez es hijo {\tt gdm-session-wor} PID 1889, que a su vez es hijo de 
+{\tt gdm-simple-slav} con PID 1546, y así siguiendo hasta llegar al proceso 
+ancestro de todos que es systemd cuyo PID es 1. 
+
+Una salida similar a la anterior puede observarse a través del comando
+{\tt ps -efH}. En donde veremos listado el PID y PPID (PID del padre) para 
+facilitar la identificación en una sola línea. 
+
+\begin{center}
+\includegraphics{psejHs.png}
+\end{center}
+
+\textit{Observar que cada proceso pertenece a un usuario, dicho usuario será el 
+dueño del proceso y tendrá privilegios sobre la administración del mismo. De 
+este modo, el sistema establece un mecanismo de seguridad entre procesos de
+diferentes usuarios.}
+
+\subsection*{Envío de señales a procesos}
 
 En el uso cotidiano de un sistema de escritorio, el usuario interviene 
 en los estados de los procesos sin darse cuenta. Al pedirle a un programa
