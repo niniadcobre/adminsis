@@ -16,7 +16,7 @@
  \makeatletter
  {\color{bl} \centering \huge \sc \textbf{
  Monitoreo de Recursos \\ 
-\large \vspace*{-8pt} \color{black} Guía básica de Monitoreo de Recursos 
+\large \vspace*{-8pt} \color{black} Guía básica de Monitorización de Recursos 
  \vspace*{8pt} }\par}
  \makeatother
 
@@ -35,7 +35,7 @@
 \fancyhf{} % clear all header and footer fields
 \fancypagestyle{plain}{\fancyhf{}}
   	\pagestyle{fancy}
- 	\lhead{\footnotesize Monitoreo de Recursos - Departamento de Ingeniería de Computadoras}
+ 	\lhead{\footnotesize Monitorización de Recursos - Departamento de Ingeniería de Computadoras}
  	\rhead{\footnotesize \thepage\ }	% ''Page 1 of 2''
 
 \def\ti#1#2{\texttt{#1} & #2 \\ }
@@ -56,16 +56,16 @@ recursos. Por lo tanto, su carrera como administrador de sistemas será
 corta y completa de stress a menos que entienda completamente los recursos 
 que tiene a su disposición.
 
-Antes de poder supervisar recursos, primero tiene que conocer que recursos 
+Antes de poder supervisar recursos, primero tiene que conocer qué recursos 
 hay que monitorizar. En un apunte anterior hemos hablado de identificación 
-de recursos. En general, todos los sistemas tienen disponibles los 
+de recursos. En general, todos los sistemas tienen disponible, al menos, los 
 siguientes recursos:
 
 \begin{itemize}
 \item CPU
 \item Memoria
 \item Almacenamiento
-\item Ancho de banda
+\item Conexión de red (ancho de banda)
 \end{itemize}
 
 Estos recursos tienen un impacto directo en el rendimiento del sistema y, 
@@ -133,7 +133,7 @@ Los cuatro recursos básicos de un sistema a monitorizar son :
 \item CPU
 \item Memoria
 \item Almacenamiento
-\item Ancho de Banda
+\item Conexiones de red, particularmente evaluaremos el uso del ancho de Banda
 \end{itemize}
 
 Lamentablemente, no es tan simple. Por ejemplo, considere una unidad de 
@@ -164,9 +164,17 @@ Las herramientas básicas utilizadas para verificar los recursos son :
 \item top
 \item vmstat
 \item df y du 
-\item La suite de herramientas de supervisión de recursos de 
+\item El conjunto de herramientas de supervisión de recursos de 
 \texttt{sysstat} (incluye iostat, sar, entre otros). 
 \end{itemize}
+
+Existen muchas otras herramientas, algunas con nombres derivados o 
+similares: ntop, atop, nload, etc. En este apunte cubriremos brevemente
+las que se encuentran en la mayor cantidad de sistemas de tipo UNIX.
+Intentaremos de este modo establecer lineamientos generales, que sirvan
+de punto de partida para análisis más profundos en aquellos casos 
+de problemas de performance menos evidentes. Cada administrador incursionará 
+en nuevas herramientas en la medida que le sea necesario. 
 
 
 \section*{Monitorizar la CPU}
@@ -530,7 +538,7 @@ Otro reto al monitorizar el ancho de banda es que pueden existir circunstancias 
 Usando vmstat, es posible determinar si es excesiva la actividad general de los dispositivos examinando los campos bi y bo; además, revisando los campos si y so le dará un poco más de conocimiento sobre cuánta actividad de disco se debe a E/S relacionada a swap.
 
 \begin{center}
- \includegraphics{vmstat2.png}
+ \includegraphics{vmstat1.png}
 \end{center}
 
         
@@ -585,7 +593,7 @@ http://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-isa-es-4/index.html
 Licencia de la documentación original: 
 Copyright © 2005 por Red Hat, Inc. Este material solamente se distribuye bajo los términos y condiciones establecidas en la Open Publication License, V1.0 o versiones posteriores (la última versión está disponible en http://www.opencontent.org/openpub/).
 
-Esta versión modificada fue realizada por Rafael Ignacio Zurita para el curso ''Administración de Sistemas'' de la carrera
+	Esta versión modificada fue realizada por Rafael Ignacio Zurita y Miriam Lechner para el curso ''Administración de Sistemas'' de la carrera
 ''Tecnicatura Universitaria en Administración de Sistemas y Software Libre''. Se mantiene la licencia original.
 
 \end{document}
