@@ -1,0 +1,141 @@
+
+******************************************************************
+        Administración de Sistemas
+        Departamento Ingeniería de Computadoras
+        Facultad de Informática - Universidad Nacional del Comahue
+******************************************************************
+
+TP N 5 - Administración de Procesos y Monitorización
+----------------------------------------------------
+
+
+ NOTA : Los siguientes ejercicios se realizan en su totalidad desde una
+        terminal en un sistema GNU/Linux .
+        Para cada pregunte indique el comando o los comandos que utilizó
+        para obtener la respuesta.
+
+Ejercicio 1
+***********
+a) Ejecute top y observe el consumo actual de memoria y CPU, tanto a
+nivel global cómo a nivel de procesos individuales. Responda: 
+	a.1) ¿Cuántos procesadores tiene su máquina? Indique los porcentajes
+	     de utilización en este momento. 
+	a.2) ¿Hay más consumo de CPU por parte de procesos de usuario o de 
+	sistema?
+	a.3) Indique los valores globales de consumo de memoria virtual (física
+	 y swap)
+	a.4) ¿Hay memoria de intercambio en su equipo? 
+	a.5) Cambie la frecuencia de muestreo de top a 10 segundos. 
+	a.6) Indique los dos procesos que consumen mas memoria residente para 
+	una de las muestras de top (ayuda con F para seleccionar el campo de 
+	ordenamiento).
+	a.7) Indique los dos procesos que consumen mas CPU para una de las 
+	muestras de top (vuelva a cambiar el ordenamiento a %CPU).
+
+Ejercicio 2
+***********
+Cree un archivo llamado "fecha" con el siguiente script: 
+
+#---------------------------------------
+#!/bin/bash 
+while true ;do 
+   printf "La fecha y hora LOCAL es: `date` \n"
+   printf "La fecha y hora UTC es  : `date -u` \n"
+done 
+#---------------------------------------
+
+a) Modifique los permisos tal que sólo root tenga permisos rwx sobre el 
+   archivo fecha. 
+
+b) Observe en qué terminal se encuentra (tty) y luego ejecute el script fecha 
+
+c) Inicie el programa de monitorización, top. Utilizando la orden 
+   interactiva F agregue la TTY de control para que sea mostrada en la 
+   salida. 
+
+d) Utilizando top identifique el PID proceso que se encuentra ejecutando el 
+   script fecha. Responda:
+	d.1) ¿Por qué campo esta ordenada la salida de la sección de tareas
+	de top?  
+	d.2) ¿En qué posición se encuentra el proceso que ejecuta fecha? 
+	¿Cuál es el porcentaje de CPU utilizado por este proceso? ¿Qué le 
+	indica esto sobre el consumo de CPU del proceso fecha? 
+	d.3) ¿Cómo afecta la ejecución de fecha, a las estadísticas globales 
+	de utilización de CPU? ¿Hay mayor consumo por parte de procesos de 
+	usuario o de sistema? 
+	d.4) Utilizando la orden interactiva k, envíe la señal de 
+	terminación (amable) al proceso fecha. Verifique. 
+
+e) Mueva (estos es mueva, no copie) el script fecha de su directorio home
+   al directorio /usr/local/bin. 
+	e.1) Vuelva a ejecutar fecha pero esta vez sin './' o camino 
+	absoluto, sólo fecha. 
+	e.2) Explique por qué motivo ahora puede ejecutar fecha sin 
+	necesidad de usar un camino absoluto. 
+	e.3) ¿Qué variable de entorno permite esto? Indique el valor de
+	la variable justo debajo de este renglón.
+	e.4) Utilice top para ubicar nuevamente el proceso que corresponde
+	a la ejecución de fecha y termínelo (amablemente). 
+
+f) Explique con sus palabras qué hace el script fecha. Mire el código y 
+   explique qué hace cada sentencia en él.  
+
+g) ¿Qué tipo de recursos fue el analizado durante este ejercicio? 
+
+
+Ejercicio 3
+***********
+a) En una terminal ejecute el programa "gloton"
+b) En otra terminal ejecute top y ordene la salida por el campo VIRT. Observe 
+   el comportamiento de gloton referente al uso de memoria. Observando la salida
+   de gloton y de top responda: 
+	b.1) ¿Qué función realiza el programa gloton? 
+ 	b.2) Observe el cambio en los valores globales para la memoria libre y 
+	     utilizada. ¿Coincide con lo que glotón dice hacer?
+
+Ejercicio 4
+***********
+a) Indiqué la definición de los comandos df y du según su página del manual. 
+
+b) Lea el ejemplo de uso de df y du en el apunte correspondiente. Utilice esta 
+   misma estrategia para responder:
+	b.1) ¿Cuál es el porcentaje de utilización del sistema de archivos 
+	montado en / ? ¿Cuánto espacio disponible queda en dicho sistema de 
+	archivos? ¿Le parece alarmante? ¿Qué limitaciones cree que podría 
+	tener un sistema con este estado?
+	b.2) Determine cuál de los subdirectorios (de primer nivel) de / 
+	ocupan mayor cantidad de espacio. 
+	b.3) Ingrese al directorio que más espacio consume en b.2) y repita la
+	operación para obtener que subdirectorios consumen más espacio. Indique
+	la lista ordenada y completa debajo de esta línea. 
+	b.4) Utilizando la página del manual que define la jerarquía de 
+	directorios, defina qué tipo de contenido tienen los tres directorios
+	que ocupan mayor espacio en el inciso b.3)
+
+c) ¿Qué tipo de recursos fue el analizado durante este ejercicio? 
+
+
+Ejercicio 5
+***********
+a) Obtenga el tamaño que ocupa en disco el directorio /home/root 
+ 
+b) monte por NFS el directorio /mnt/compartido de la computadora cuya IP es 
+   10.0.15.101 el directorio /root/nfs
+	
+c) Obtenga el tamaño que ocupa en disco el directorio /root ¿varía con 
+   respecto a lo que obtuvo en a)? ¿A qué cree que se debe? ¿Qué conclusión 
+   puede sacar de esto?
+
+d) Revise el manual de du y obtenga una opción que le permita obtener el espacio
+   ocupado por /root sin contar lo ocupado por el directorio montado por 
+   NFS. 
+
+f) Obtenga la salida de df -hP y responda:
+	f.1) ¿Cuál es el tamaño total mostrado para el directorio montado por 
+	NFS?
+	f.2) ¿Cuál es el porcentaje de uso del directorio montado por NFS? 
+
+g) Desmonte el directorio /mnt/compartido
+	
+h) ¿Qué tipo de recursos fue el analizado durante este ejercicio? 
+
