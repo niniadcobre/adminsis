@@ -69,7 +69,7 @@ almacenar datos es el disco rígido, ya que se encuentra compuesto de
 pequeñísimos campos magnéticos que deben mantenerse intactos en un mundo 
 lleno de interferencias electromagnéticas. Otros tipos de almacenamiento 
 masivo modernos, como por ejemplo las memorias flash, si bien utilizan 
-otro tipo de tecnologías, también son suceptibles de fallas.  
+otro tipo de tecnologías, también son susceptibles de fallas.  
 
 Por otra parte el software tiende a ser no confiable; un programa 
 sólido como una roca es una excepción, no una regla. Debemos tener siempre
@@ -266,7 +266,7 @@ Una copia total incluye todos y cada uno de los archivos seleccionados
 para ser incluidos en el proceso de copia, sin importar si han 
 sufrido cambio o no desde la última vez que se realizó la copia anterior.
 
-Es la forma de copia de seguridad de más tiempo y recursos (léase espacio 
+Es la forma de copia de seguridad que más tiempo y recursos (léase espacio 
 de almacenamiento) consume, pero la más rápida y segura a la hora de 
 recuperar datos de ella. 
 
@@ -289,7 +289,7 @@ acumulando los cambios desde la última total.
 
 \subsection*{Copia Incremental}
 Las copias de tipo incremental contienen únicamente los archivos que fueron
-modificados o creados desde la última copia total, o incremental. La 
+modificados o creados desde la última copia total, {\it o incremental}. La 
 diferencia fundamental respecto a las copias diferenciales, es que no son 
 redundantes (la información no se repite de una copia a la siguiente).
 
@@ -403,8 +403,8 @@ En caso de que la copia no quepa en una única cinta, es necesario activar la
  opción ``{\tt --multi-volume}'' o ``{\tt -M}''. 
 
 Después de realizar una copia, debe verificar si todo se encuentra en 
-correctas condiciones utilizando la opción ``{\tt --compare}, ``{\tt -d} ó 
-``{\tt --diff}. 
+correctas condiciones utilizando la opción ``{\tt --compare},'' ``{\tt -d}'' ó 
+``{\tt --diff}''. 
 
 \colorbox{grey}{\parbox[t]{0.95\linewidth}{ \vspace*{0.5cm} { 
 {\bf Ejemplo:} en la siguiente secuencia se ve el uso de la opción ``-d'',
@@ -438,7 +438,7 @@ en otro medio de almacenamiento.
 } \vspace*{0.5cm} } } 
 
 El comando {\tt tar} posee muchas opciones para seleccionar un subconjunto
-de archivos, por ejemplo la opción ``{\tt --newer}'' o ``{\tt -N} nos 
+de archivos, por ejemplo la opción ``{\tt --newer}'' o ``{\tt -N}'' nos 
 permite archivar sólo archivos creados luego de una cierta fecha.  
 
 \subsection*{Recuperando archivos }
@@ -480,8 +480,8 @@ que fue eliminado por error: \\
 } \vspace*{0.5cm} } } 
 
 Utilice la opción ``{\tt --list}'' (o su forma corta ``{\tt -t}'') para 
-es son los archivos presentes en un volumen de backup, sin efectivamente 
-extraerlos del mismo:
+ver cuáles son los archivos presentes en un volumen de backup, sin efectivamente 
+extraerlos (-x):
 
 \colorbox{grey}{\parbox[t]{0.95\linewidth}{ \vspace*{0.5cm} { 
 {\bf Ejemplo:} continuando con el contenido de la cinta magnética, el 
