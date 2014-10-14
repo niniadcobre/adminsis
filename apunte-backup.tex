@@ -67,8 +67,11 @@ Si bien el hardware moderno tiende a ser confiable, puede llegar a dañarse
 aparentemente de manera espontánea. La pieza más crítica para 
 almacenar datos es el disco rígido, ya que se encuentra compuesto de 
 pequeñísimos campos magnéticos que deben mantenerse intactos en un mundo 
-lleno de interferencias electromagnéticas.  
-Por otra parte el software moderno tiende a ser no confiable; un programa 
+lleno de interferencias electromagnéticas. Otros tipos de almacenamiento 
+masivo modernos, como por ejemplo las memorias flash, si bien utilizan 
+otro tipo de tecnologías, también son suceptibles de fallas.  
+
+Por otra parte el software tiende a ser no confiable; un programa 
 sólido como una roca es una excepción, no una regla. Debemos tener siempre
 presente que el software está desarrollado por seres humanos y como tal, es
 imperfecto. Las personas son completamente no confiables, suelen confundirse
@@ -88,7 +91,7 @@ Las copias de seguridad son una manera de proteger la inversión realizada
 en los datos. Las pérdidas de información tienen menor impacto si existen 
 varias copias resguardadas, en tal caso existirá solo el costo que conlleve
 recuperar los datos perdidos desde las copias, que en muchos casos, 
-dependiendo de la criticidad de la información puede ser un costo 
+dependiendo de la criticidad de la información puede ser   
 considerable. 
 
 Es importante realizar copias de seguridad correctamente. Como todo lo 
@@ -98,7 +101,7 @@ funcionan; ya que no desea enterarse tiempo después que las copias no son
 útiles.\footnote{No reírse. Esto le sucede a muchas personas.} Además,
  piense en estos dos casos: sus datos podrían dañarse justo en el momento 
 en que esta realizando copias de seguridad; o, si solamente tiene un medio 
-para copias de seguridad, se podría llegar a romperse también. 
+para copias de seguridad, podría llegar a romperse también. 
 
 O se entera, cuando intenta recuperar, que olvidó respaldar algo importante,
 como la base de datos de los usuarios en un sitio con miles de usuarios. 
@@ -155,6 +158,15 @@ tipos no lo son tanto, relativamente confiables y veloces, muy disponibles,
 y generalmente (aunque depende de su capacidad) son útiles para almacenar 
 mucha información (en el orden de los cientos de giga a tera byte). 
 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{3590Tape.JPG}
+\renewcommand{\figurename}{Fig.}
+\caption{IBM 3590 data cartridge almacena hasta 10GiB sin compresión}
+\label{contexto:figura}
+\end{figure}
+
 Para copias de seguridad de datos de computadora y transferencia de datos 
 física, los discos ópticos como el CD y el DVD están siendo reemplazados 
 gradualmente por dispositivos de estado sólido más rápidos, pequeños y 
@@ -166,7 +178,8 @@ disminuyendo sus precios.
 
 Existen muchas herramientas que pueden ser utilizadas para realizar las 
 copias de seguridad.  Las herramientas tradicionales en entornos UNIX 
-son \texttt{\textbf{tar}}, \texttt{\textbf{cpio}} y \texttt{\textbf{dump}}.
+son \texttt{\textbf{tar}}, \texttt{\textbf{cpio}} y \texttt{\textbf{dump (que incluye los comandos 
+dump y restore)}}.
  Además, existe un gran 
 número de software de terceros (comerciales y libres como
  Amanda\footnote{http://www.amanda.org/}) que pueden ser 
@@ -187,7 +200,7 @@ Algunas versiones  UNIX antiguas de \texttt{\textbf{tar}} y
 muy largos, etc.), pero las versiones GNU/Linux de estas herramientas 
 deberían manejar toda clase de archivos correctamente.
 
-El comando \texttt{\textbf{dump}} es diferente a las dos herramientas 
+El comando \texttt{\textbf{dump/restore}} es diferente a las dos herramientas 
 anteriores, debido a que lee el sistema de archivos directamente, y no a 
 través del sistema de archivos.  Además, fue desarrollado específicamente 
 para generar copias de seguridad; \texttt{\textbf{tar}} y 
@@ -199,7 +212,7 @@ Si es necesario copiar todo el sistema de archivos, entonces la lectura
 directa es mas efectiva, debido a que se realizan muchos menos movimientos 
 de la cabeza lecto-escritora del disco. La mayor desventaja es que dump es 
 un programa de copia específico para solamente un tipo de sistemas de 
-archivos; el programa \texttt{\textbf{dump}}de GNU/Linux puede leer 
+archivos; el programa \texttt{\textbf{dump/restore}} de GNU/Linux puede leer 
 únicamente los sistema de archivos ext2/3/4. Al ser diseñado para copias
 de seguridad, \texttt{\textbf{dump}} soporta distintos niveles de copias
  (tema que se encuentra explicado en páginas posteriores); con 
@@ -217,7 +230,7 @@ nuevas tecnologías que han intentado minimizar en la medida de lo posible
 el tamaño de los datos almacenados, el tiempo de copia y el tiempo de 
 restauración de los mismos.
 
-Fruto de estas investigaciones son los cuatro modelos básicos que hoy 
+Fruto de estas investigaciones son los tres modelos básicos que hoy 
 día se utilizan en los procesos de generación de copias de seguridad:
 \begin{itemize}
 \item Copia total o completa (full backup).
@@ -230,7 +243,7 @@ utilizar cambia con las circunstancias particulares de cada situación
 y en la mayoría de los casos depende fundamentalmente de cuatro factores:
 
 \begin{itemize}
-\item La capacidad de los soportes sobre los que se va a gravar la 
+\item La capacidad de los soportes sobre los que se va a grabar la 
 información.
 \item El período de tiempo disponible para hacer la copia.
 \item El medio en el que se desarrolla el trabajo (local, intranet, 
@@ -265,11 +278,29 @@ decir, si se tienen programadas varias copias diferenciales entre copias
  totales, cada una de ellas no tendrá en cuenta la anterior e irá 
 acumulando los cambios desde la última total.
 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{diferencial.png}
+\renewcommand{\figurename}{Fig.}
+\caption{Copia diferencial}
+\label{contexto:figura}
+\end{figure}
+
 \subsection*{Copia Incremental}
 Las copias de tipo incremental contienen únicamente los archivos que fueron
 modificados o creados desde la última copia total, o incremental. La 
 diferencia fundamental respecto a las copias diferenciales, es que no son 
 redundantes (la información no se repite de una copia a la siguiente).
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{incremental.png}
+\renewcommand{\figurename}{Fig.}
+\caption{Copia incremental}
+\label{contexto:figura}
+\end{figure}
 
 \subsection*{Un esquema sencillo}
 
