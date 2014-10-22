@@ -116,6 +116,3 @@ d)- Comprima cada archivo en $HOME/practico6-ejercicio5/ con el programa gzip.
 e)- ¿Qué ventajas o desventajas tiene el método empleado en c) comparado con el método
     empleado en d) ?
 
-
-
-

@@ -1,0 +1,84 @@
+******************************************************************
+        Administración de Sistemas
+        Departamento Ingeniería de Computadoras
+        Facultad de Informática - Universidad Nacional del Comahue
+******************************************************************
+
+TP N 7 - Copias de seguridad
+----------------------------------------------------
+
+
+ NOTA : Los siguientes ejercicios se realizan en su totalidad desde una
+        terminal en un sistema GNU/Linux .
+        Para cada pregunte indique el comando o los comandos que utilizó
+        para obtener la respuesta.
+
+ NOTA 2: Para cada uno de los comandos tar que utilice en el práctico, mencione
+         escribiendo la forma corta y larga de los argumentos.
+
+Modelos de copias: 
+------------------
+Para los siguentes ejercicios utilice la opción --listed-incremental del 
+comando tar. 
+
+Todas las copias de seguridad y los correspondientes metadatos, deberán quedar 
+guardadas _desde el momento de su creación_ en el directorio NFS 
+/mnt/compartido proveniente de la computadora 10.0.15.101, para ello: 
+	* cree un usuario con uid 1009, username backadmin
+        * móntelo en el directorio /backup (verifique que no se encuentra ya montado, en 
+ese caso desmóntelo y vuelva a montarlo en el lugar correcto).
+
+
+0) Listado de contenido
+   0.a) Liste el contenido del directorio $HOME/importante incluyendo los 
+   permisos.
+   0.b) ¿Qué tipo de archivos son? 
+   
+1) Copia total o completa: 
+Hacer una _copia total o completa_ del directorio "importante" que se encuentra
+dentro de el HOME de root. El archivo de backup debe llamarse 
+full_importante_`hostname`.tar .Explique el uso del las comillas invertidas "`".
+El archivo de metadatos deberá llamarse full_importante_`hostname`.snar 
+
+2) Modifique archivos en el directorio importante, tal que al menos: 
+	* elimine un archivo 
+	* modifique el contenido de un archivo 
+	* agregue un archivo nuevo. 
+
+3) Cree una copia diferencial con respecto a la total creada en 1). La copia 
+deberá llamarse dif1_importante_`hostname`.tar
+El archivo de metadatos deberá llamarse dif1_importante_`hostname`.snar 
+
+4) Modifique archivos en el directorio importante, tal que al menos: 
+	* elimine un archivo 
+	* modifique el contenido de un archivo 
+	* agregue un archivo nuevo. 
+
+5) Cree una nueva copia diferencial con respecto a 1) llamada 
+dif2_importante_`hostname`.tar  con metadatos dif2_importante_`hostname`.snar y una 
+incremental con respecto a 3) (dif1_importante_`hostname`.snar) llamada 
+inc1_importante_`hostname`.tar con metadatos inc1_importante_`hostname`.snar
+
+6) Responda: 
+	a) Liste todos los archivos resultantes de cada copia 
+        (exclusivamente de su máquina) creados durante los incisos 
+        anteriores con permisos y tamaño en kilobytes. 
+	b) ¿Cuánto ocupa cada una de las copias realizadas en los ejercicio?
+	¿Cuál es la mayor? ¿Cuál la menor? ¿Tiene sentido lo que observa?
+	c) ¿Qué tipo de archivos creo para realizar las copias de seguridad?
+	
+NOTA: en todos los ejercicios verifique que los permisos de los archivos se
+mantienen. 
+
+7) Explique cuáles son los pasos que debería realizar para recuperar el
+directorio importante  a partir de las copias realizadas en el ejercicio 5). 
+¿Cuál toma mayor cantida de tiempo?  
+
+8) Borre el directorio importante y recupérelo a partir de la copia diferencial
+creada en el ejercicio 3). ¿Es este el estado más reciente del directorio?  
+
+9) Borre el directorio importante y recupérelo a partir de la copia incremental
+creada en el ejercicio 5). ¿Es este el estado más reciente del directorio? 
+
+10) ¿Dónde se encuentra guardado el binario tar? ¿Por qué puede ejecutarlo sin 
+tener que escribir la ruta completa? 
