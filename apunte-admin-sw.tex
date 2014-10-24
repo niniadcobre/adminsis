@@ -65,7 +65,7 @@ o datos compartidos utilizados por varias aplicaciones, entre otras cosas.
 El objetivo principal
 será tratar de lograr un proceso de instalación tan atómico como sea 
 posible, de manera que si ocurre un error en el proceso, el administrador
-sólo debe pausar la operación en curso (instalación, desistalación, etc)
+sólo debe pausar la operación en curso (instalación, desinstalación, etc)
 y el sistema permanecerá en un estado consistente.
 
 Existen diversas maneras de gestionar el software en una distribución 
@@ -86,7 +86,7 @@ artículo.
 
 \section*{Administrando Paquetes de Software}
 
-Las tareás básicas en la Administración de Software son :
+Las tareas básicas en la Administración de Software son :
 \begin{itemize}
 \item Actualizar la lista de paquetes disponibles;
 \item Instalar, reinstalar, actualizar, y eliminar paquetes de software;
@@ -112,7 +112,7 @@ Existen diferentes formatos de paquetes utilizados, pero
 dos formatos de paquetes binarios ampliamente difundidos son los formatos DEB y RPM.
 
 {\bf deb} es el formato y la extensión del nombre de los archivos de paquetes de software de la distribución de Linux Debian y derivadas (e.j.Ubuntu), y, el nombre más usado para dichos paquetes. 
-{\bf rpm} es el formato y extensión del nombre de los archivos de paquetes de la distribucion Red Hat y muchas otras.
+{\bf rpm} es el formato y extensión del nombre de los archivos de paquetes de la distribución Red Hat y muchas otras.
 
 
 \subsection*{Repositorio de Paquetes de software}
@@ -161,7 +161,7 @@ RPM y YUM (para sistemas Red Hat), y dpkg y APT (para los sistemas Debian) posee
 Ambos permiten instalar y quitar paquetes. La información sobre los paquetes instalados se guarda en una base de datos en el sistema local. Ambos tienen la funcionalidad básica desde la línea de comando, además de herramientas adicionales que pueden proporcionar al usuario interfaces de uso más sencillo. Ambos pueden también recuperar paquetes de Internet.
 
 Al instalar un sistema GNU/Linux, por lo general, se instalan una gran variedad de paquetes. 
-El set puede personalizarse según el uso que se quiera dar al sistema, como servidor, escritorio, o terminal de trabajo del desarrollador. 
+El conjunto puede personalizar según el uso que se quiera dar al sistema, como servidor, escritorio, o terminal de trabajo del desarrollador. 
 Y en algún momento probablemente sea necesario instalar paquetes nuevos para obtener alguna otra funcionalidad, actualizar el paquete que posee, o incluso borrar paquetes que ya no se necesitan o son obsoleto debido a la aparición de nuevos paquetes. 
 
 Las siguientes secciones explican en ejemplos, las acciones básicas utilizadas en la administración
@@ -169,7 +169,9 @@ de paquetes.
 
 \subsection*{Actualizar la lista de paquetes disponibles}
 
-En un sistema Debian se puede definir el listado de repositorios oficial a utilizar  editando el archivo {\tt /etc/apt/sources.list}
+En un sistema Debian se puede definir el listado de repositorios oficial a utilizar  editando el archivo {\tt /etc/apt/sources.list}.
+Esto puede realizarse directamente con cualquier editor (provisto de que Ud. tiene privilegios de root), o bien a través del 
+comando {\tt apt edit-sources}.
 
 Ejemplo :
 
@@ -187,7 +189,7 @@ El comando \texttt{apt-get update} sincroniza el índice de paquetes desde sus
            fuentes. Los índices de paquetes disponibles se obtienen de los
            lugares especificados en \texttt{/etc/apt/sources.list}. Por ejemplo, cuando
            se usa un archivo de Debian, esta orden descarga y analiza los
-           ficheros Packages.gz, de tal forma que la información acerca de los
+           archivo Packages.gz, de tal forma que la información acerca de los
            nuevos paquetes pasa a estar disponible. Siempre se debe realizar
            un update antes de un upgrade o un dist-upgrade. Tenga en cuenta
            que el indicador de progreso será incorrecto, ya que se desconoce
@@ -196,12 +198,8 @@ El comando \texttt{apt-get update} sincroniza el índice de paquetes desde sus
 \fcolorbox{black}{grey}{
 \parbox[t]{1.0\linewidth}{ \vspace*{0.4cm}
 {\bf Lo importante:} 
-Es una buena costumbre ejecutar este archivo regularmente para mantenerse informado acerca de las posibilidades de actualización para el sistema, particularmente las actualizaciones de seguridad.
+Es una buena costumbre ejecutar este comando regularmente para mantenerse informado acerca de las posibilidades de actualización para el sistema, particularmente las actualizaciones de seguridad.
 \vspace*{0.4cm} } }
-
-
-
-En redhat el comando es :
 
 \subsection*{Instalar un Paquete de Software}
 
@@ -229,7 +227,7 @@ Si este paquete necesitara otro para funcionar -- como en este caso -- APT resol
      Do you want to continue? [Y/n]\\
  } \vspace*{0.5cm} } } 
 
-El paquete nautilus necesita las biblotecas compartidas mencionadas, así pues APT las descargará del servidor. Si se especifican antes los nombres de esas biblotecas con el comando apt-get APT no pregunta, si desea continuar o no; supone automáticamente que se desean instalar esos paquetes.
+El paquete nautilus necesita las bibliotecas compartidas mencionadas, así pues APT las descargará del servidor. Si se especifican antes los nombres de esas bibliotecas con el comando apt-get APT no pregunta, si desea continuar o no; supone automáticamente que se desean instalar esos paquetes.
 
 Esto significa que APT sólo pregunta por confirmación cuando se van a instalar paquetes que no fueron especificados en la línea de comando.
 
@@ -322,9 +320,22 @@ Observe que apt-get lista los paquetes que serán instalados aparte de los selec
 \subsection*{Actualizar el Sistema}
 
 Actualizar el Sistema es traer desde los repositorios las versiones mas recientes de los paquetes instalados,
-e instalarlas. Se debe utilizar la opción dist-upgrade de apt-get.
+e instalarlas. Se debe utilizar la opción upgrade o dist-upgrade de apt-get.
 
-Es muy importante realizar un \texttt{apt-get update} antes de actualizar el sistema con dist-upgrade.
+{\bf upgrade}
+   
+        upgrade se usa para instalar la versión más nueva de todos los paquetes instalados en el sistema provenientes de alguna de las fuentes listadas en /etc/apt/sources.list. Los
+           paquetes instalados con una nueva versión disponible se descargan y actualizan, y bajo ninguna circunstancia se desinstalarán paquetes, o se instalarán paquetes nuevos. Las
+           nuevas versiones de programas instalados que no se puedan actualizar sin cambiar el estado de instalación de otros paquetes no se instalarán, manteniéndose la versión actual.
+           Debe realizar un update antes para que apt-get sepa que hay nuevas versiones disponibles.
+
+{\bf dist-upgrade}
+           dist-upgrade, además de realizar las acciones de upgrade, trata inteligentemente los cambios de dependencias debidos a las nuevas versiones de paquetes.  apt-get tiene un
+           sistema «inteligente» de resolución de conflictos, y si es necesario tratará de actualizar los paquetes más importantes a costa de los menos importantes. Por ello, puede que
+           la orden dist-upgrade elimine algunos paquetes. El archivo /etc/apt/sources.list contiene una lista de sitios desde los que descargar los archivos de paquetes. También puede
+           consultar apt\_preferences(5) si quiere invalidar este comportamiento para paquetes individuales.
+
+Es muy importante realizar un \texttt{apt-get update} antes de actualizar el sistema.
 
 \colorbox{grey}{\parbox[t]{0.95\linewidth}{ \vspace*{0.5cm} {\tt
      \# apt-get update\\
@@ -346,13 +357,6 @@ Es muy importante realizar un \texttt{apt-get update} antes de actualizar el sis
      Need to get 0B/7098kB of archives. After unpacking 3118kB will be used.\\
  } \vspace*{0.5cm} } } 
 
-           dist-upgrade, además de realizar las acciones de upgrade, trata
-           inteligentemente los cambios de dependencias debidos a las nuevas
-           versiones de paquetes. apt-get tiene un sistema «inteligente» de
-           resolución de conflictos, y si es necesario tratará de actualizar
-           los paquetes más importantes a costa de los menos importantes. El
-           fichero \texttt{/etc/apt/sources.list} contiene la lista de sitios desde los cuales descargar los ficheros de paquetes. 
-
 \subsection*{Eliminando archivos de paquete no utilizados: apt-get clean y autoclean}
 
 Cuando APT instala un paquete, descarga los archivos necesarios de los servidores listados en \texttt{/etc/apt/sources}, estos a su vez son guardados en un depósito local (\texttt{/var/cache/apt/archives/}), y de ahí se procede con la instalación.
@@ -364,6 +368,10 @@ Con el tiempo el depósito puede crecer y ocupar mucho espacio en disco. Afortun
 \texttt{apt-get autoclean} elimina sólo los archivos que no pueden ser descargados de nuevo.
 
 \subsection*{Acciones Útiles para conocer sobre los Paquetes}
+\subsubsection*{Obtener Información de todos los paquetes instalados}
+
+El comando {\tt apt list --installed} nos permite obtener un listado de todos los paquetes instalados en el sistema.
+
 \subsubsection*{Obtener Información de un Paquete}
 
  ¿Cómo se puede saber el nombre de un paquete que se quiere instalar?
