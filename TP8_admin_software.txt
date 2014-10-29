@@ -61,97 +61,80 @@ de los siguientes paquetes de sofware:
 	* apt-file 
 -----------------------------------------------------------------------------
 
-Ejercicio 3
+Ejercicio 2
 Utilizando el comando apt-cache obtenga información de los paquetes de 
 software y responda:
-	3.0) ¿Para qué sirve el comando apt-cache? (man)
-	3.a) ¿Qué funcionalidad provee cada uno de los paquetes?
-	3.b) ¿Cuál es el tamaño que ocuparán en disco una vez instalados?
-	3.c) ¿Qué versión del software se instalará? 
-	3.d) ¿El paquete posee dependencias? 
-	3.e) ¿Quién es el mantenedor del paquete? ¿Es este necesariamente el 
+	2.0) ¿Para qué sirve el comando apt-cache? (man)
+	2.a) ¿Qué funcionalidad provee cada uno de los paquetes?
+	2.b) ¿Cuál es el tamaño que ocuparán en disco una vez instalados?
+	2.c) ¿Qué versión del software se instalará? 
+	2.d) ¿El paquete posee dependencias? 
+	2.e) ¿Quién es el mantenedor del paquete? ¿Es este necesariamente el 
 	     desarrollador principal del sofware? 
-	3.f) ¿Existe alguna referencia a la fuente del desarrollo original?
+	2.f) ¿Existe alguna referencia a la fuente del desarrollo original?
 
 
-Ejercicio 4
+Ejercicio 3
 Instale los paquetes utilizando apt-get. Responda:
-	4.0) ¿Para qué sirve el comando apt-get? (man)
-	4.a) ¿Se instalaron otros paquetes además del requerido? 
-	4.b) Se se instalaron paquetes adicionales, liste los mismos. 
-	4.c) ¿A qué se debe la instalación de paquetes de software adicionales?
-	4.d) ¿Coinciden los paquetes adicionales instalados con la información 
+	3.0) ¿Para qué sirve el comando apt-get? (man)
+	3.a) ¿Se instalaron otros paquetes además del requerido? 
+	3.b) Se se instalaron paquetes adicionales, liste los mismos. 
+	3.c) ¿A qué se debe la instalación de paquetes de software adicionales?
+	3.d) ¿Coinciden los paquetes adicionales instalados con la información 
 	de dependencias mostrada en el ejercicio anterior?  
 
-Ejercicio 5
+Ejercicio 4
 Utilizando el comando dpkg (gestor de paquetes de bajo nivel de Debian y 
 derivados) verifique que efectivamente se instalaron los paquetes. Compare
 esta salida con el comando "apt list --installed".  
 
-Ejercicio 6 
+Ejercicio 5 
 Utilizando el comando dpkg liste los archivos  contenidos en los paquetes 
 recientemente instalados. ¿Qué tipo de archivos instaló? 
 
-Ejercicio 7 
+Ejercicio 6 
 Un usuario ha indicado que necesita el binario /usr/games/sl, utilice el 
 comando apt-file para ubicar el paquete que contiene dicho comando. Instale el 
 paquete, y ejecute sl. 
 
-Ejercicio 8
+Ejercicio 7
 Observe la página man de apt-get y explique qué diferencia hay entre la opción 
 remove y purge. 
 
-Ejercicio 9
+Ejercicio 8
 Utilice la opción remove de apt-get para eliminar el paquete apt-file. 
-	9.a) Verifique en qué estado de instalación quedo el paquete con el 
+	8.a) Verifique en qué estado de instalación quedo el paquete con el 
 	comando dpkg. 
-	9.b) Utilice el comando dpkg para obtener el listado de archivos que 
+	8.b) Utilice el comando dpkg para obtener el listado de archivos que 
 	pertenecen a apt-file y que aún permanecen en el sistema. Compare el 
 	listado con lo obtenido en el ejercicio 6. 
-	9.c) ¿Qué tipo de archivos aún permanecen en el sistema? 
-	9.d) Utilice la opción purge de apt-get para completar la eliminación 
+	8.c) ¿Qué tipo de archivos aún permanecen en el sistema? 
+	8.d) Utilice la opción purge de apt-get para completar la eliminación 
 	del paquete apt-file del sistema. 
-	9.e) Verifique el estado de instalación del paquete con el comando 
+	8.e) Verifique el estado de instalación del paquete con el comando 
 	dpkg. 
 
-Ejercicio 10
+Ejercicio 9
 Vuelva a instalar el paquete apt-file. Responda:
-	10.a) ¿Cambió el tamaño total y número de dependencias descargadas 
+	9.a) ¿Cambió el tamaño total y número de dependencias descargadas 
 	con respecto a la primera vez que lo instaló? 
-	10.b) ¿Por qué cree que sucede esto? ¿Qué conclusión puede sacar con 
+	9.b) ¿Por qué cree que sucede esto? ¿Qué conclusión puede sacar con 
 	respecto a la remoción de paquetes y sus dependencias? 
 
 
-Ejercicio 11 (opcional) 
+Ejercicio 10 (opcional) 
 En otra terminal conectada a la VM utilice lynx para revisar el contenido del 
 repositorio configurado para ser utilizado por apt. Revíselo a través de un 
 navegador web gráfico en la PC local. ¿En qué caso podría Lynx serle útil? 
 
-Ejercicio 12 (opcional)
+Ejercicio 11 (opcional)
 Desde una terminal conectado a la VM utilice el sofware irssi, conéctese al 
 servidor de chat utilizando el comando de irssi /connect irc.freenode.net, 
 únase al chat admins2014 mediante el comando de irssi /join admins2013 y 
 deje su mensaje :) (puede cambiar su nick utilizando el comando 
 /nick <nombre_nick> ). 
 
-******************************************************************
-        Administración de Sistemas
-        Departamento Ingeniería de Computadoras
-        Facultad de Informática - Universidad Nacional del Comahue
-******************************************************************
-
-TP N 9 - Administración de software (segunda parte)
-----------------------------------------------------
-
-
- NOTA : Los siguientes ejercicios se realizan en su totalidad desde una
-        terminal en un sistema GNU/Linux .
-        Para cada pregunte indique el comando o los comandos que utilizó
-        para obtener la respuesta.
-
-
-
-Ejercicio 13
+Ejercicio 12
 Obtenga información del paquete fdupes
 	1.a) ¿Qué funcionalidad provee el  paquetes?
 	1.b) ¿Cuál es el tamaño que ocupará en disco una vez instalado?
@@ -160,16 +143,16 @@ Obtenga información del paquete fdupes
 	instalada? 
 	1.e) ¿Existe alguna referencia a la fuente del desarrollo original?
 
-Ejercicio 2
+Ejercicio 13
 Instale el software fdupes. Utilizando dpkg liste todos los archivos instalados 
 por el paquete. ¿Qué tipo de archivos instaló?. Muestre el estado de instalación 
 del software con el comando dpkg. 
 
-Ejercicio 3
+Ejercicio 14
 Remueva el software fdupes. Verifique con dpkg que efectivamente el software no 
 se encuentra instalado y que no han quedado archivos de configuración instalados. 
 
-Ejercicio 4
+Ejercicio 15
 Los gestores de paquetes como apt, resuelven el acceso a los repositorios.
 El proceso de instalación se compone de dos grandes fases: descargar el 
 software e instalar el software. Durante la fase de descarga apt guarda los
@@ -178,15 +161,15 @@ archivos de paquete a instalar en el directorio /var/cache/apt/archives.
 Liste el contenido del directorio /var/cache/apt/archives. ¿Qué puede decir
 sobre la remoción del software fdupes? 
 
-Ejercicio 5
+Ejercicio 16
 Utilizando el paquete .deb correspondiente a fdupes que se encuentra en 
 /var/cache/apt/archives, instálelo nuevamente utilizando el comando dpkg. 
 
-Ejercicio 6 
+Ejercicio 17 
 Remueva (des-instale) el software fdupes. ¿Qué herramienta utilizó? 
 ¿Por qué ésa y no otra? 
 
-Ejercicio 7 
+Ejercicio 18 
 Dentro del directorio /mnt/compartido de la máquina 10.0.15.101, se 
 encuentra un backup de paquetes que un usuario a requerido se instalen 
 en la máquina virtual. El archivo se llama paquetes.tar.gz :
@@ -198,7 +181,7 @@ en la máquina virtual. El archivo se llama paquetes.tar.gz :
 	de la extracción. 
 	7.d) ¿Qué clase de archivos contiene el directorio? 
 
-Ejercicio 8 
+Ejercicio 19
 Utilizando los paquetes provistos por el usuario en el ejercicio 7, instale
 utilizando el gestor de paquetes dpkg, los paquetes dos2unix y pacman4console. 
 Responda: 
@@ -206,9 +189,10 @@ Responda:
 	apt-cache para responder) 
 	8.b) ¿Qué archivos instaló cada paquete? ¿Qué tipo de archivos son? 
 	8.c) Ejecute el binario de pacman4console ¿Dónde se encuentra guardado
-	dicho binario? 
+	dicho binario? ¿Cómo podría hacer para no tener que escribir la ruta 
+	completa para ejecturarlo?
 
-Ejercicio 9 
+Ejercicio 20 
 Utilizando los paquetes provistos por el usuario en el ejercicio 7: 
 	9.a) Utilizando dpkg -c, liste el contenido del paquete dnsutils. 
 	Observar que solo esta listando, no efectivamente instalando. 
@@ -221,22 +205,24 @@ Utilizando los paquetes provistos por el usuario en el ejercicio 7:
 	9.f) Verifique que nslookup funciona correctamente. 
 	9.g) Intente remover el paquete libbind9-80 ¿Qué sucede? ¿Por qué? 
 
-Ejercicio 10)
+Ejercicio 21 
 Observando lo hecho en el ejercicio 7, 8 y 9, y las "buenas prácticas" 
 mencionadas: ¿Considera que los hecho en dichos ejercicios se corresponde con 
 las buenas prácticas? ¿Qué otro método sugiere para lograr los mismos 
 resultados? ¿Que potenciales problemas podrían surgir de proceder como en los
 ejercicios 7,8 y 9? 
 
-Ejercicio 11)
+Ejercicio 22
 Remueva el software instalado en 8 y 9, incluidas dependencias. Vuelva a 
 instalarlos utilizando el mejor método disponible. 
 
-Ejercicio)
+Ejercicio 23
+	23.a) Un usuario requiere se instale el software Skype Privativo. 
+	Describa cómo procedería paso a paso para lograr (de ser posible) 
+	la instalación de dicho software. 
 
-Un usuario requiere se instale el software Skype Privativo. Describa cómo 
-procedería paso a paso para lograr (de ser posible) la instalación de 
-dicho software. 
+	23.b) Verifique su procedimiento con la cátedra, implemente la 
+	instalación en una de las máquinas virtuales asignadas.
 
-Verifique su procedimiento con la cátedra, implemente la instalación en 
-una de las máquinas virtuales asignadas. 
+	Ayuda: el comando wget permite descargar archivos desde la web sin 
+	necesidad de un entorno gráfico.  
